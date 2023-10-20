@@ -42,7 +42,7 @@
     <main class="wrapper" style="padding-top:2em">
   
       <section class="container" id="demo-content">
-        <h1 class="title">Scan QR Code from Video Camera1</h1>
+        <h1 class="title">Scan QR Code from Video Camera</h1>
           <a class="button" id="startButton">Start</a>
           <a class="button" id="resetButton">Reset</a>
   
@@ -55,55 +55,7 @@
         <div><code id="result"></code></div></div>
     </main>
   
-    <!-- <script type="text/javascript" src="zxing.min.js"></script>
-    <script type="text/javascript" src="app.js"></script> -->
-
-    <script>
-        const video = document.getElementById('video');
-        const switchCameraButton = document.getElementById('switchCamera');
-        let currentStream;
-        let currentDeviceIndex = 0;
-
-        // Function to get the available video input devices (cameras)
-        async function getVideoDevices() {
-            const devices = await navigator.mediaDevices.enumerateDevices();
-            return devices.filter(device => device.kind === 'videoinput');
-        }
-
-        // Function to initialize the camera stream using a specified device
-        async function initCamera(deviceId) {
-            try {
-                if (currentStream) {
-                    currentStream.getTracks().forEach(track => track.stop());
-                }
-
-                const constraints = { video: { deviceId: { exact: deviceId } } };
-                const stream = await navigator.mediaDevices.getUserMedia(constraints);
-                video.srcObject = stream;
-                currentStream = stream;
-            } catch (error) {
-                console.error('Error accessing the camera: ', error);
-            }
-        }
-
-        // Function to toggle between available cameras
-        async function toggleCamera() {
-            const devices = await getVideoDevices();
-            if (devices.length < 2) {
-                console.error('No other camera available.');
-                return;
-            }
-
-            currentDeviceIndex = (currentDeviceIndex + 1) % devices.length;
-            const nextDeviceId = devices[currentDeviceIndex].deviceId;
-            initCamera(nextDeviceId);
-        }
-
-        // Add a click event listener to the switchCameraButton
-        switchCameraButton.addEventListener('click', toggleCamera);
-
-        // Initialize the camera with the default device (first available camera)
-        initCamera(getVideoDevices()[0].deviceId);
-    </script>
+    <!-- <script type="text/javascript" src="zxing.min.js"></script> -->
+    <script type="text/javascript" src="app.js"></script>
 </body>
 </html>
