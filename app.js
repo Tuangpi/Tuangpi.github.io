@@ -11,6 +11,7 @@ let currentFacingMode = 'environment';
 const video = document.getElementById('video');
 const switchCameraButton = document.getElementById('switchCamera');
 switchCameraButton.addEventListener('click', toggleCamera);
+
 function toggleCamera() {
   if (currentFacingMode === 'environment') {
     initCamera('user');
@@ -45,11 +46,11 @@ window.addEventListener('load', function () {
       selectedDeviceId = videoInputDevices[0].deviceId
 
       document.getElementById('startButton').addEventListener('click', () => {
-        try {
-          initCamera(currentFacingMode);
-        } catch (error) {
-          document.getElementById('result').textContent = error + 'init caramer'
-        }
+        // try {
+        //   initCamera(currentFacingMode);
+        // } catch (error) {
+        //   document.getElementById('result').textContent = error + 'init caramer'
+        // }
         decodeOnce(codeReader, selectedDeviceId);
       })
 
