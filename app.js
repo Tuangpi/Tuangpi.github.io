@@ -18,8 +18,6 @@ window.addEventListener('load', function () {
     .then((videoInputDevices) => {
 
       selectedDeviceId = videoInputDevices[0].deviceId
-      switchCamera.style.display = "none"
-
       if (videoInputDevices.length > 1) {
         switchCamera.style.display = "block"
         selectedDeviceId = videoInputDevices[1].deviceId
