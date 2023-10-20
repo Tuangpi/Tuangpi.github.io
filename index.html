@@ -1,78 +1,62 @@
-<!-- <!doctype html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="author" content="QR Code Reader for JS">
-
-  <title>Scan Qr Code</title>
-  <style>
-      html,
-      body {
-        padding: 0;
-        margin: 0;
-        font-family: Arial, Helvetica, sans-serif;
-      }
-      .wrapper {
-        padding: 0 4rem;
-        display: flex;
-        justify-content: center;
-      }
-      .button{
-        background-color: darkred;
-        padding: 0.5rem 1rem;
-        border-radius: 0.5rem;
-        outline: none;
-        color: white;
-        cursor: pointer;
-      }
-      .video{
-        margin-top: 2rem;
-      }
-      .result{
-        display: flex;
-      }
-      #result{
-        margin-left: 1rem;
-      }
-  </style>
-</head>
-
-<body>
-
-  <main class="wrapper" style="padding-top:2em">
-
-    <section class="container" id="demo-content">
-      <h1 class="title">Scan QR Code from Video Camera1</h1>
-        <a class="button" id="startButton">Start</a>
-        <a class="button" id="resetButton">Reset</a>
-
-      <div class="video">
-        <video id="video" width="300" height="200" style="border: 1px solid gray" autoplay></video>
-        <button id="switchCamera">Switch Camera</button>
-      </div>
-
-      <div class="result"><label>Result:</label>
-      <div><code id="result"></code></div></div>
-  </main>
-
-  <script type="text/javascript" src="zxing.min.js"></script>
-  <script type="text/javascript" src="app.js"></script>
-
-</body>
-
-</html> -->
-
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Camera Switcher</title>
-</head>
-<body>
-    <h1>Camera Switcher</h1>
-    <video id="video" width="640" height="480" autoplay style="border: 1px solid gray;"></video>
-    <button id="switchCamera">Switch Camera</button>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="QR Code Reader for JS">
+  
+    <title>Scan Qr Code</title>
+    <style>
+        html,
+        body {
+          padding: 0;
+          margin: 0;
+          font-family: Arial, Helvetica, sans-serif;
+        }
+        .wrapper {
+          padding: 0 4rem;
+          display: flex;
+          justify-content: center;
+        }
+        .button{
+          background-color: darkred;
+          padding: 0.5rem 1rem;
+          border-radius: 0.5rem;
+          outline: none;
+          color: white;
+          cursor: pointer;
+        }
+        .video{
+          margin-top: 2rem;
+        }
+        .result{
+          display: flex;
+        }
+        #result{
+          margin-left: 1rem;
+        }
+    </style>
+  </head>
+  <body>
+
+    <main class="wrapper" style="padding-top:2em">
+  
+      <section class="container" id="demo-content">
+        <h1 class="title">Scan QR Code from Video Camera1</h1>
+          <a class="button" id="startButton">Start</a>
+          <a class="button" id="resetButton">Reset</a>
+  
+        <div class="video">
+          <video id="video" width="300" height="200" style="border: 1px solid gray" autoplay></video>
+          <button id="switchCamera">Switch Camera</button>
+        </div>
+  
+        <div class="result"><label>Result:</label>
+        <div><code id="result"></code></div></div>
+    </main>
+  
+    <!-- <script type="text/javascript" src="zxing.min.js"></script>
+    <script type="text/javascript" src="app.js"></script> -->
 
     <script>
         const video = document.getElementById('video');
