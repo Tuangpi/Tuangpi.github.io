@@ -1,6 +1,6 @@
 function decodeOnce(codeReader, selectedDeviceId) {
   codeReader.decodeFromInputVideoDevice(selectedDeviceId, 'video').then((result) => {
-    console.log(result)
+    console.log(result, 'decode result')
     document.getElementById('result').textContent = result.text
   }).catch((err) => {
     console.error(err)
@@ -45,7 +45,11 @@ window.addEventListener('load', function () {
       selectedDeviceId = videoInputDevices[0].deviceId
 
       document.getElementById('startButton').addEventListener('click', () => {
-        initCamera(currentFacingMode);
+        try {
+          initCamera(currentFacingMode);
+        } catch (error) {
+          console.log(error, 'camera error')
+        }
         decodeOnce(codeReader, selectedDeviceId);
       })
 
