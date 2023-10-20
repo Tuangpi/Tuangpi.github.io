@@ -9,6 +9,10 @@ html,
         display: flex;
         justify-content: center;
       }
+      .container{
+        display: flex;
+        flex-direction: column;
+      }
       .button{
         background-color: darkred;
         padding: 0.5rem 1rem;
@@ -18,11 +22,14 @@ html,
         cursor: pointer;
       }
       .video{
-        margin-top: 2rem;
+        margin-top: 2rem
       }
       .result{
         display: flex;
       }
       #result{
         margin-left: 1rem;
+      }
+      .hidden{
+        display: none;
       }
