@@ -1,59 +1,65 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
+
 <head>
-    <title>Camera Switcher</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="QR Code Reader for JS">
+
+  <title>Scan Qr Code</title>
+  <style>
+      html,
+      body {
+        padding: 0;
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      .wrapper {
+        padding: 0 4rem;
+        display: flex;
+        justify-content: center;
+      }
+      .button{
+        background-color: darkred;
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        outline: none;
+        color: white;
+        cursor: pointer;
+      }
+      .video{
+        margin-top: 2rem;
+      }
+      .result{
+        display: flex;
+      }
+      #result{
+        margin-left: 1rem;
+      }
+  </style>
 </head>
+
 <body>
-    <h1>Camera Switcher</h1>
-    <video id="video" width="640" height="480" autoplay style="border: 1px solid gray;"></video>
-    <button id="switchCamera">Switch Camera</button>
 
-    <script>
-        const video = document.getElementById('video');
-        const switchCameraButton = document.getElementById('switchCamera');
-        let currentStream;
-        let currentDeviceIndex = 0;
+  <main class="wrapper" style="padding-top:2em">
 
-        // Function to get the available video input devices (cameras)
-        async function getVideoDevices() {
-            const devices = await navigator.mediaDevices.enumerateDevices();
-            return devices.filter(device => device.kind === 'videoinput');
-        }
+    <section class="container" id="demo-content">
+      <h1 class="title">Scan QR Code from Video Camera</h1>
+        <a class="button" id="startButton">Start</a>
+        <a class="button" id="resetButton">Reset</a>
 
-        // Function to initialize the camera stream using a specified device
-        async function initCamera(deviceId) {
-            try {
-                if (currentStream) {
-                    currentStream.getTracks().forEach(track => track.stop());
-                }
+      <div class="video">
+        <video id="video" width="300" height="200" style="border: 1px solid gray"></video>
+        <button id="switchCamera">Switch Camera</button>
+      </div>
 
-                const constraints = { video: { deviceId: { exact: deviceId } } };
-                const stream = await navigator.mediaDevices.getUserMedia(constraints);
-                video.srcObject = stream;
-                currentStream = stream;
-            } catch (error) {
-                console.error('Error accessing the camera: ', error);
-            }
-        }
+      <div class="result"><label>Result:</label>
+      <div><code id="result"></code></div></div>
+  </main>
 
-        // Function to toggle between available cameras
-        async function toggleCamera() {
-            const devices = await getVideoDevices();
-            if (devices.length < 2) {
-                console.error('No other camera available.');
-                return;
-            }
+  <script type="text/javascript" src="zxing.min.js"></script>
+  <script type="text/javascript" src="app.js"></script>
 
-            currentDeviceIndex = (currentDeviceIndex + 1) % devices.length;
-            const nextDeviceId = devices[currentDeviceIndex].deviceId;
-            initCamera(nextDeviceId);
-        }
-
-        // Add a click event listener to the switchCameraButton
-        switchCameraButton.addEventListener('click', toggleCamera);
-
-        // Initialize the camera with the default device (first available camera)
-        initCamera(getVideoDevices()[0].deviceId);
-    </script>
 </body>
+
 </html>

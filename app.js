@@ -1,3 +1,44 @@
+const video = document.getElementById('video');
+const switchCameraButton = document.getElementById('switchCamera');
+let currentStream;
+let currentDeviceIndex = 0;
+
+async function getVideoDevices() {
+  const devices = await navigator.mediaDevices.enumerateDevices();
+  return devices.filter(device => device.kind === 'videoinput');
+}
+
+async function initCamera(deviceId) {
+  try {
+    if (currentStream) {
+      currentStream.getTracks().forEach(track => track.stop());
+    }
+
+    const constraints = { video: { deviceId: { exact: deviceId } } };
+    const stream = await navigator.mediaDevices.getUserMedia(constraints);
+    video.srcObject = stream;
+    currentStream = stream;
+  } catch (error) {
+    console.error('Error accessing the camera: ', error);
+  }
+}
+
+async function toggleCamera() {
+  const devices = await getVideoDevices();
+  if (devices.length < 2) {
+    console.error('No other camera available.');
+    return;
+  }
+
+  currentDeviceIndex = (currentDeviceIndex + 1) % devices.length;
+  const nextDeviceId = devices[currentDeviceIndex].deviceId;
+  initCamera(nextDeviceId);
+}
+
+switchCameraButton.addEventListener('click', toggleCamera);
+
+initCamera(getVideoDevices()[0].deviceId);
+
 // function decodeOnce(codeReader, selectedDeviceId) {
 //   codeReader.decodeFromInputVideoDevice(selectedDeviceId, 'video').then((result) => {
 //     console.log(result, 'decode result')
@@ -7,34 +48,6 @@
 //     document.getElementById('result').textContent = err + 'decode one'
 //   })
 // }
-let currentFacingMode = 'environment';
-const video = document.getElementById('video');
-const switchCameraButton = document.getElementById('switchCamera');
-switchCameraButton.addEventListener('click', toggleCamera);
-
-function toggleCamera() {
-  if (currentFacingMode === 'environment') {
-    initCamera('user');
-  } else {
-    initCamera('environment');
-  }
-}
-
-function initCamera(facingMode) {
-  const constraints = {
-    video: { facingMode: facingMode }
-  };
-
-  navigator.mediaDevices.getUserMedia(constraints)
-    .then(function (stream) {
-      video.srcObject = stream;
-      console.log(stream)
-      currentFacingMode = facingMode;
-    })
-    .catch(function (error) {
-      document.getElementById('result').textContent = error + 'navigator e'
-    });
-}
 
 
 // window.addEventListener('load', function () {
