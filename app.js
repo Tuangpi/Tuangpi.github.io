@@ -24,7 +24,7 @@ window.addEventListener('load', function () {
       if (videoInputDevices.length > 1) {
         sourceSelect.onclick = () => {
           selectedDeviceId = videoInputDevices[1].deviceId;
-          document.getElementById('result').textContent = 'switchbutton clicked' + videoInputDevices.length;
+          document.getElementById('result').textContent = 'switchbutton ' + videoInputDevices.length;
         };
       }
 
