@@ -30,7 +30,7 @@ function initCamera(facingMode) {
       currentFacingMode = facingMode;
     })
     .catch(function (error) {
-      console.error('Error accessing the camera: ', error);
+      document.getElementById('result').textContent = error
     });
 }
 
@@ -48,7 +48,7 @@ window.addEventListener('load', function () {
         try {
           initCamera(currentFacingMode);
         } catch (error) {
-          console.log(error, 'camera error')
+          document.getElementById('result').textContent = error
         }
         decodeOnce(codeReader, selectedDeviceId);
       })
