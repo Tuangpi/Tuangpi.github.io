@@ -19,12 +19,12 @@ window.addEventListener('load', function () {
   codeReader.getVideoInputDevices()
     .then((videoInputDevices) => {
 
-      selectedDeviceId = videoInputDevices[0].deviceId
+      selectedDeviceId = videoInputDevices[1].deviceId
 
       if (videoInputDevices.length > 1) {
         sourceSelect.onclick = () => {
           selectedDeviceId = videoInputDevices[1].deviceId;
-          document.getElementById('result').textContent = 'switchbutton clicked' + selectedDeviceId;
+          document.getElementById('result').textContent = 'switchbutton clicked' + videoInputDevices.length;
         };
       }
 
