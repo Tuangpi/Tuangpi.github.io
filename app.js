@@ -7,33 +7,33 @@ function decodeOnce(codeReader, selectedDeviceId) {
     document.getElementById('result').textContent = err + 'decode one'
   })
 }
-let currentFacingMode = 'environment';
-const video = document.getElementById('video');
-const switchCameraButton = document.getElementById('switchCamera');
-switchCameraButton.addEventListener('click', toggleCamera);
+// let currentFacingMode = 'environment';
+// const video = document.getElementById('video');
+// const switchCameraButton = document.getElementById('switchCamera');
+// switchCameraButton.addEventListener('click', toggleCamera);
 
-function toggleCamera() {
-  if (currentFacingMode === 'environment') {
-    initCamera('user');
-  } else {
-    initCamera('environment');
-  }
-}
+// function toggleCamera() {
+//   if (currentFacingMode === 'environment') {
+//     initCamera('user');
+//   } else {
+//     initCamera('environment');
+//   }
+// }
 
-function initCamera(facingMode) {
-  const constraints = {
-    video: { facingMode: facingMode }
-  };
+// function initCamera(facingMode) {
+//   const constraints = {
+//     video: { facingMode: facingMode }
+//   };
 
-  navigator.mediaDevices.getUserMedia(constraints)
-    .then(function (stream) {
-      video.srcObject = stream;
-      currentFacingMode = facingMode;
-    })
-    .catch(function (error) {
-      document.getElementById('result').textContent = error + 'navigator e'
-    });
-}
+//   navigator.mediaDevices.getUserMedia(constraints)
+//     .then(function (stream) {
+//       video.srcObject = stream;
+//       currentFacingMode = facingMode;
+//     })
+//     .catch(function (error) {
+//       document.getElementById('result').textContent = error + 'navigator e'
+//     });
+// }
 
 
 window.addEventListener('load', function () {
