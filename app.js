@@ -37,7 +37,7 @@ async function toggleCamera() {
 
 switchCameraButton.addEventListener('click', toggleCamera);
 
-initCamera(getVideoDevices()[0].deviceId);
+// initCamera(getVideoDevices()[0].deviceId);
 
 // function decodeOnce(codeReader, selectedDeviceId) {
 //   codeReader.decodeFromInputVideoDevice(selectedDeviceId, 'video').then((result) => {
