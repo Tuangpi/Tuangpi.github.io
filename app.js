@@ -40,7 +40,7 @@
 function decodeOnce(codeReader, selectedDeviceId) {
   codeReader.decodeFromInputVideoDevice(selectedDeviceId, 'video').then((result) => {
     console.log(result, 'decode result')
-    document.getElementById('result').textContent = result.text
+    document.getElementById('result').textContent = result.text + ', ' + selectedDeviceId
   }).catch((err) => {
     console.error(err)
     document.getElementById('result').textContent = err + 'decode one'
@@ -57,14 +57,17 @@ window.addEventListener('load', function () {
     .then((videoInputDevices) => {
       const sourceSelect = document.getElementById('switchCamera')
       selectedDeviceId = videoInputDevices[0].deviceId
+      console.log(videoInputDevices)
 
       if (videoInputDevices.length > 1) {
         sourceSelect.onclick = () => {
           selectedDeviceId = videoInputDevices[1].deviceId;
+          document.getElementById('result').textContent = 'switchbutton clicked' + selectedDeviceId;
         };
       }
 
       document.getElementById('startButton').addEventListener('click', () => {
+        document.getElementById('result').textContent = 'startbutton clicked' + selectedDeviceId;
         decodeOnce(codeReader, selectedDeviceId);
       })
 
