@@ -1,67 +1,68 @@
-function decodeOnce(codeReader, selectedDeviceId) {
-  codeReader.decodeFromInputVideoDevice(selectedDeviceId, 'video').then((result) => {
-    console.log(result, 'decode result')
-    document.getElementById('result').textContent = result.text
-  }).catch((err) => {
-    console.error(err)
-    document.getElementById('result').textContent = err + 'decode one'
-  })
+// function decodeOnce(codeReader, selectedDeviceId) {
+//   codeReader.decodeFromInputVideoDevice(selectedDeviceId, 'video').then((result) => {
+//     console.log(result, 'decode result')
+//     document.getElementById('result').textContent = result.text
+//   }).catch((err) => {
+//     console.error(err)
+//     document.getElementById('result').textContent = err + 'decode one'
+//   })
+// }
+let currentFacingMode = 'environment';
+const video = document.getElementById('video');
+const switchCameraButton = document.getElementById('switchCamera');
+switchCameraButton.addEventListener('click', toggleCamera);
+
+function toggleCamera() {
+  if (currentFacingMode === 'environment') {
+    initCamera('user');
+  } else {
+    initCamera('environment');
+  }
 }
-// let currentFacingMode = 'environment';
-// const video = document.getElementById('video');
-// const switchCameraButton = document.getElementById('switchCamera');
-// switchCameraButton.addEventListener('click', toggleCamera);
 
-// function toggleCamera() {
-//   if (currentFacingMode === 'environment') {
-//     initCamera('user');
-//   } else {
-//     initCamera('environment');
-//   }
-// }
+function initCamera(facingMode) {
+  const constraints = {
+    video: { facingMode: facingMode }
+  };
 
-// function initCamera(facingMode) {
-//   const constraints = {
-//     video: { facingMode: facingMode }
-//   };
+  navigator.mediaDevices.getUserMedia(constraints)
+    .then(function (stream) {
+      video.srcObject = stream;
+      console.log(stream)
+      currentFacingMode = facingMode;
+    })
+    .catch(function (error) {
+      document.getElementById('result').textContent = error + 'navigator e'
+    });
+}
 
-//   navigator.mediaDevices.getUserMedia(constraints)
-//     .then(function (stream) {
-//       video.srcObject = stream;
-//       currentFacingMode = facingMode;
+
+// window.addEventListener('load', function () {
+//   let selectedDeviceId;
+//   const codeReader = new ZXing.BrowserQRCodeReader()
+//   console.log('ZXing code reader initialized')
+
+//   codeReader.getVideoInputDevices()
+//     .then((videoInputDevices) => {
+//       selectedDeviceId = videoInputDevices[0].deviceId
+
+//       document.getElementById('startButton').addEventListener('click', () => {
+//         // try {
+//         //   initCamera(currentFacingMode);
+//         // } catch (error) {
+//         //   document.getElementById('result').textContent = error + 'init caramer'
+//         // }
+//         decodeOnce(codeReader, selectedDeviceId);
+//       })
+
+//       document.getElementById('resetButton').addEventListener('click', () => {
+//         codeReader.reset()
+//         document.getElementById('result').textContent = '';
+//         console.log('Reset.')
+//       })
+
 //     })
-//     .catch(function (error) {
-//       document.getElementById('result').textContent = error + 'navigator e'
-//     });
-// }
-
-
-window.addEventListener('load', function () {
-  let selectedDeviceId;
-  const codeReader = new ZXing.BrowserQRCodeReader()
-  console.log('ZXing code reader initialized')
-
-  codeReader.getVideoInputDevices()
-    .then((videoInputDevices) => {
-      selectedDeviceId = videoInputDevices[0].deviceId
-
-      document.getElementById('startButton').addEventListener('click', () => {
-        // try {
-        //   initCamera(currentFacingMode);
-        // } catch (error) {
-        //   document.getElementById('result').textContent = error + 'init caramer'
-        // }
-        decodeOnce(codeReader, selectedDeviceId);
-      })
-
-      document.getElementById('resetButton').addEventListener('click', () => {
-        codeReader.reset()
-        document.getElementById('result').textContent = '';
-        console.log('Reset.')
-      })
-
-    })
-    .catch((err) => {
-      console.error(err)
-    })
-})
+//     .catch((err) => {
+//       console.error(err)
+//     })
+// })
