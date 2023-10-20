@@ -4,7 +4,7 @@ function decodeOnce(codeReader, selectedDeviceId) {
     document.getElementById('result').textContent = result.text
   }).catch((err) => {
     console.error(err)
-    document.getElementById('result').textContent = err
+    document.getElementById('result').textContent = err + 'decode one'
   })
 }
 let currentFacingMode = 'environment';
@@ -30,7 +30,7 @@ function initCamera(facingMode) {
       currentFacingMode = facingMode;
     })
     .catch(function (error) {
-      document.getElementById('result').textContent = error
+      document.getElementById('result').textContent = error + 'navigator e'
     });
 }
 
@@ -48,7 +48,7 @@ window.addEventListener('load', function () {
         try {
           initCamera(currentFacingMode);
         } catch (error) {
-          document.getElementById('result').textContent = error
+          document.getElementById('result').textContent = error + 'init caramer'
         }
         decodeOnce(codeReader, selectedDeviceId);
       })
